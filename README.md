@@ -20,6 +20,8 @@ gyou-dori >>> https://www.w3.org/TR/jlreq/#processing_of_gyoudori
 
 ## Usage
 
+The following two codes have the same effect.
+
 ```tex
 \begin{gyoudori}[#1]{#2}
 #3
