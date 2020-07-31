@@ -12,6 +12,10 @@ Yuwsuke Kieda
 
 0.1
 
+## License
+
+MIT
+
 ## Abstract
 
 We offer one way of realizing the gyou-dori.
@@ -47,10 +51,6 @@ The line numbers of the area.
 ### Arguments: #3
 
 The heading text.
-
-## License
-
-MIT
 
 ## Repository
 
