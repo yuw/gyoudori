@@ -3,14 +3,12 @@
    [2020/07/31 v0.1 style file ``gyoudori.sty''^^J
     by Yuwsuke Kieda]
 
-\newcount\@gyoudori@cnt
+\def\@tmp@skip@t{t}%
+\def\@tmp@skip@c{c}%
+\def\@tmp@skip@b{b}%
 
-\def\gyoudori{\@testopt{\@gyoudori}{c}}
-\def\@gyoudori[#1]#2#3{%
+\def\@gyoudori@opt@chck#1{%
   \def\@tmp@skip@opt{#1}%
-  \def\@tmp@skip@t{t}%
-  \def\@tmp@skip@c{c}%
-  \def\@tmp@skip@b{b}%
   \@tfor\@tempa:={#1}\do{%
     \ifx\@tempa\@tmp@skip@t\relax
     \else
@@ -18,24 +16,51 @@
       \else
         \ifx\@tempa\@tmp@skip@b\relax
         \else
-          \PackageError{gyoudori}{%
-            Undefined option of command the xgyoudori! Option is only t, c or b}{%
-            Option of command the xgyoudori is only t, c or b.}
+          \PackageError{gyoudoriarea}{%
+            Undefined option of command the gyoudoriarea! Option is only t, c or b}{%
+            Option of command the gyoudoriarea is only t, c or b.}
         \fi
       \fi
-    \fi}
-  \@gyoudori@cnt#2\relax
-  \@gyoudori@cnt\numexpr\@gyoudori@cnt - 1\relax
+    \fi}}
+
+\newcount\@gyoudori@cnt
+
+\def\@gyoudori@heading#1{
   \leavevmode\par\vspace*{-\dimexpr \Cht + \Cdp \relax}
   \noindent
   \vbox to \dimexpr \@gyoudori@cnt\Cvs + \Cht \relax{%
     \ifx\@tmp@skip@opt\@tmp@skip@c\vss\fi
     \ifx\@tmp@skip@opt\@tmp@skip@b\vss\fi
-    #3
+    #1
     \ifx\@tmp@skip@opt\@tmp@skip@t\vss\fi
     \ifx\@tmp@skip@opt\@tmp@skip@c\vss\vskip-\Cdp\fi
     \ifx\@tmp@skip@opt\@tmp@skip@b\vskip-\Cdp\fi
   }%
+}
+
+\def\@gyoudori@count@lines#1{
+  \@gyoudori@cnt#1\relax
+  \@gyoudori@cnt\numexpr\@gyoudori@cnt - 1\relax
+}
+
+\newbox\@gyoudori@box
+
+\def\gyoudori{\@testopt{\@gyoudori}{c}}
+\def\@gyoudori[#1]#2{%
+  \@gyoudori@opt@chck{#1}
+  \@gyoudori@count@lines{#2}
+  \setbox\@gyoudori@box\vbox\bgroup
+}
+\def\endgyoudori{%
+  \egroup
+  \@gyoudori@heading{\box\@gyoudori@box}
+}
+
+\def\gyoudoriarea{\@testopt{\@gyoudoriarea}{c}}
+\def\@gyoudoriarea[#1]#2#3{%
+  \@gyoudori@opt@chck{#1}
+  \@gyoudori@count@lines{#2}
+  \@gyoudori@heading{#3}
 }
 
 \endinput

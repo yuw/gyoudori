@@ -24,7 +24,15 @@ gyou-dori >>> https://www.w3.org/TR/jlreq/#processing_of_gyoudori
 
 ## Usage
 
-\gyoudori[#1]{#2}{#3}
+```tex
+\begin{gyoudori}[#1]{#2}
+#3
+\end{gyoudori}
+```
+
+```tex
+\gyoudoriarea[#1]{#2}{#3}
+```
 
 ### Arguments (option): #1
 
