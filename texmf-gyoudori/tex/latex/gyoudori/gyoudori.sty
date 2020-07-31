@@ -1,0 +1,41 @@
+\NeedsTeXFormat{pLaTeX2e}[2020/02/02]
+\ProvidesPackage{gyoudori}
+   [2020/07/31 v0.1 style file ``gyoudori.sty''^^J
+    by Yuwsuke Kieda]
+
+\newcount\@gyoudori@cnt
+
+\def\gyoudori{\@testopt{\@gyoudori}{c}}
+\def\@gyoudori[#1]#2#3{%
+  \def\@tmp@skip@opt{#1}%
+  \def\@tmp@skip@t{t}%
+  \def\@tmp@skip@c{c}%
+  \def\@tmp@skip@b{b}%
+  \@tfor\@tempa:={#1}\do{%
+    \ifx\@tempa\@tmp@skip@t\relax
+    \else
+      \ifx\@tempa\@tmp@skip@c\relax
+      \else
+        \ifx\@tempa\@tmp@skip@b\relax
+        \else
+          \PackageError{gyoudori}{%
+            Undefined option of command the xgyoudori! Option is only t, c or b}{%
+            Option of command the xgyoudori is only t, c or b.}
+        \fi
+      \fi
+    \fi}
+  \@gyoudori@cnt#2\relax
+  \@gyoudori@cnt\numexpr\@gyoudori@cnt - 1\relax
+  \leavevmode\par\vspace*{-\dimexpr \Cht + \Cdp \relax}
+  \noindent
+  \vbox to \dimexpr \@gyoudori@cnt\Cvs + \Cht \relax{%
+    \ifx\@tmp@skip@opt\@tmp@skip@c\vss\fi
+    \ifx\@tmp@skip@opt\@tmp@skip@b\vss\fi
+    #3
+    \ifx\@tmp@skip@opt\@tmp@skip@t\vss\fi
+    \ifx\@tmp@skip@opt\@tmp@skip@c\vss\vskip-\Cdp\fi
+    \ifx\@tmp@skip@opt\@tmp@skip@b\vskip-\Cdp\fi
+  }%
+}
+
+\endinput
