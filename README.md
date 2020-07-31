@@ -22,6 +22,10 @@ We offer one way of realizing the gyou-dori.
 
 gyou-dori >>> https://www.w3.org/TR/jlreq/#processing_of_gyoudori
 
+## Requirement
+
+(u)pLaTeX with e-
+
 ## Usage
 
 The following two codes have the same effect.
